@@ -16,16 +16,16 @@ function CartItemCard({data}) {
         
     }
   return (
-    <div className='flex items-center justify-between bg-white p-4 rounded-xl shadow border'>
-      <div className='flex items-center gap-4'>
-        <img src={data.image} alt="" className='w-20 h-20 object-cover rounded-lg border'/>
+    <div className='flex items-center justify-between bg-white p-3 rounded-2xl shadow-lg border border-orange-100 w-full max-w-2xl mx-auto' style={{minHeight:"86px"}}>
+      <div className='flex items-center gap-3'>
+        <img src={data.image} alt="" className='w-16 h-16 object-cover rounded-lg border border-orange-200'/>
         <div>
-            <h1 className='font-medium text-gray-800'>{data.name}</h1>
-            <p className='text-sm text-gray-500'>₹{data.price} x {data.quantity}</p>
-            <p className="font-bold text-gray-900">₹{data.price*data.quantity}</p>
+            <h1 className='font-semibold text-gray-800 text-sm'>{data.name}</h1>
+            <p className='text-xs text-gray-500'>₹{data.price} x {data.quantity}</p>
+            <p className="font-bold text-gray-900 text-base">₹{data.price*data.quantity}</p>
         </div>
       </div>
-      <div className='flex items-center gap-3'>
+      <div className='flex items-center gap-2'>
         <button className='p-2 cursor-pointer bg-gray-100 rounded-full hover:bg-gray-200' onClick={()=>handleDecrease(data.id,data.quantity)}>
         <FaMinus size={12}/>
         </button>

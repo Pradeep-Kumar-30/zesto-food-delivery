@@ -7,29 +7,29 @@ function CartPage() {
     const navigate = useNavigate()
     const { cartItems, totalAmount } = useSelector(state => state.user)
     return (
-        <div className='min-h-screen bg-[#fff9f6] flex justify-center p-6'>
+        <div className='min-h-screen bg-gradient-to-br from-orange-50 via-red-50 to-yellow-50 flex justify-center p-6 pt-24'>
             <div className='w-full max-w-[800px]'>
                 <div className='flex items-center gap-[20px] mb-6 '>
-                    <div className=' z-[10] ' onClick={() => navigate("/")}>
-                        <IoIosArrowRoundBack size={35} className='text-[#ff4d2d]' />
+                    <div className=' z-[10] cursor-pointer hover:scale-110 transition' onClick={() => navigate("/")}>
+                        <IoIosArrowRoundBack size={35} className='text-orange-600' />
                     </div>
-                    <h1 className='"text-2xl font-bold  text-start'>Your Cart</h1>
+                    <h1 className='text-3xl font-bold gradient-text text-start'>Your Cart</h1>
                 </div>
                 {cartItems?.length == 0 ? (
-                    <p className='text-gray-500 text-lg text-center'>Your Cart is Empty</p>
+                    <p className='text-gray-500 text-lg text-center py-10'>Your Cart is Empty</p>
                 ) : (<>
-                    <div className='space-y-4'>
+                    <div className='space-y-5'>
                         {cartItems?.map((item, index) => (
                             <CartItemCard data={item} key={index} />
                         ))}
                     </div>
-                    <div className='mt-6 bg-white p-4 rounded-xl shadow flex justify-between items-center border'>
+                    <div className='mt-6 bg-white p-6 rounded-3xl shadow-lg flex justify-between items-center border-2 border-orange-200 hover:shadow-xl transition'>
 
-                        <h1 className='text-lg font-semibold'>Total Amount</h1>
-                        <span className='text-xl font-bold text-[#ff4d2d]'>₹{totalAmount}</span>
+                        <h1 className='text-lg font-bold text-gray-800'>Total Amount</h1>
+                        <span className='text-2xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent'>₹{totalAmount}</span>
                     </div>
-                    <div className='mt-4 flex justify-end' > 
-                        <button className='bg-[#ff4d2d] text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-[#e64526] transition cursor-pointer' onClick={()=>navigate("/checkout")}>Proceed to CheckOut</button>
+                    <div className='mt-6 flex justify-end' > 
+                        <button className='bg-gradient-to-r from-orange-500 to-red-500 text-white px-8 py-4 rounded-full text-lg font-bold hover:shadow-lg hover:scale-105 transition cursor-pointer' onClick={()=>navigate("/checkout")}>Proceed to CheckOut</button>
                     </div>
                 </>
                 )}

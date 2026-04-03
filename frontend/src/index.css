@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 * {
- /* ya scroll */
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* IE/Edge purane versions */
 }
@@ -9,4 +8,33 @@
 ::-webkit-scrollbar, 
 ::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
+}
+
+:root {
+  --primary: #ff4d2d;
+  --primary-dark: #e64528;
+  --secondary: #ffa200;
+  --light-bg: #fff9f6;
+  --card-bg: #ffffff;
+  --text-dark: #1a1a1a;
+  --text-light: #666666;
+  --border-color: #f0f0f0;
+}
+
+body {
+  background: linear-gradient(135deg, #fff9f6 0%, #ffe8dc 100%);
+  color: var(--text-dark);
+}
+
+/* Smooth transitions */
+button, a, input {
+  transition: all 0.3s ease;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #ff4d2d 0%, #ffa200 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
