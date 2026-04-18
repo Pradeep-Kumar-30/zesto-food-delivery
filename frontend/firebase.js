@@ -6,15 +6,17 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey:import.meta.env.VITE_FIREBASE_APIKEY,
-  authDomain: "zesto-food-delivery.firebaseapp.com",
-  projectId: "zesto-food-delivery",
-  storageBucket: "zesto-food-delivery.firebasestorage.app",
-  messagingSenderId: "693314883513",
-  appId: "1:693314883513:web:4840c943ecf3fb61a33068"
+  apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
+  authDomain: "zesto-9d61f.firebaseapp.com",
+  projectId: "zesto-9d61f",
+  storageBucket: "zesto-9d61f.firebasestorage.app",
+  messagingSenderId: "385588157932",
+  appId: "1:385588157932:web:1e27214f9704f86a0a34c9"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth=getAuth(app)
-export {app,auth}
+
+//expoert both app and auth
+export {app, auth}
