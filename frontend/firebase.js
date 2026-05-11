@@ -2,19 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || import.meta.env.VITE_FIREBASE_APIKEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  apiKey: "AIzaSyBeBc7p6Ihzcnl6PVMVeg5DV99NBrR7gv0",  // ← hardcode karo
+  authDomain: "zzesto-21a16.firebaseapp.com",
+  projectId: "zzesto-21a16",
+  storageBucket: "zzesto-21a16.firebasestorage.app",
+  messagingSenderId: "788989402890",
+  appId: "1:788989402890:web:6683a10026e3a76c6c64f3"
 };
-
-if (!firebaseConfig.apiKey) {
-  console.error(
-    "[zesto] Missing Firebase api key: set VITE_FIREBASE_APIKEY in frontend/.env"
-  );
-}
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
