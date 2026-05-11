@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { APP_NAME } from '../brand'
 import { MdDeliveryDining } from 'react-icons/md'
 import { BiRestaurant } from 'react-icons/bi'
 import { IoGiftOutline } from 'react-icons/io5'
@@ -13,28 +14,28 @@ function Landing() {
   return (
     <div className='w-full bg-white overflow-x-hidden'>
       {/* Section 1: Hero */}
-      <div className='w-full h-screen bg-gradient-to-br from-red-50 via-orange-50 to-yellow-50 flex flex-col items-center justify-center relative overflow-hidden'>
-        <div className='absolute inset-0 opacity-20'>
-          <div className='absolute top-0 left-0 w-96 h-96 bg-red-300 rounded-full blur-3xl'></div>
-          <div className='absolute bottom-0 right-0 w-96 h-96 bg-orange-300 rounded-full blur-3xl'></div>
+      <div className='w-full h-screen bg-gradient-to-br from-slate-100 via-violet-50 to-cyan-50 flex flex-col items-center justify-center relative overflow-hidden'>
+        <div className='absolute inset-0 opacity-25'>
+          <div className='absolute top-0 left-0 w-96 h-96 bg-fuchsia-300 rounded-full blur-3xl'></div>
+          <div className='absolute bottom-0 right-0 w-96 h-96 bg-cyan-300 rounded-full blur-3xl'></div>
         </div>
 
         <div className='relative z-10 text-center max-w-2xl px-6'>
-          <h1 className='text-7xl font-black text-red-500 mb-4'>zesto</h1>
-          <h2 className='text-4xl md:text-5xl font-bold text-gray-800 mb-4'>
-            Your Favorite Food, Delivered Fast
+          <h1 className='text-6xl md:text-7xl font-black gradient-text mb-4 tracking-tight'>{APP_NAME}</h1>
+          <h2 className='text-3xl md:text-5xl font-bold text-slate-800 mb-4'>
+            Neighbourhood kitchens, one tap away
           </h2>
-          <p className='text-xl text-gray-600 mb-8'>
-            Experience fast & easy online ordering on the Zesto app
+          <p className='text-xl text-slate-600 mb-8'>
+            Order from local spots and track every minute until it reaches your door.
           </p>
 
           <div className='flex gap-4 justify-center flex-wrap mb-12'>
-            <button className='bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-semibold transition'>
+            <button className='bg-violet-500 hover:bg-violet-700 text-white px-8 py-3 rounded-lg font-semibold transition'>
               🍔 Order Now
             </button>
             <button 
               onClick={() => navigate('/signin')}
-              className='border-2 border-red-500 text-red-500 hover:bg-red-50 px-8 py-3 rounded-lg font-semibold transition'
+              className='border-2 border-violet-600 text-fuchsia-600 hover:bg-violet-50 px-8 py-3 rounded-lg font-semibold transition'
             >
               Sign In
             </button>
@@ -47,24 +48,24 @@ function Landing() {
       {/* Section 2: Stats & Mission */}
       <div className='w-full py-20 px-6 bg-white'>
         <div className='max-w-6xl mx-auto'>
-          <h2 className='text-5xl font-bold text-center mb-4 text-gray-800'>
-            Better food for more people
+          <h2 className='text-5xl font-bold text-center mb-4 text-slate-800'>
+            Built for small cities & busy evenings
           </h2>
-          <p className='text-center text-gray-600 text-lg mb-16'>
-            For years, we've been enabling our customers to discover new tastes, delivered right to their doorstep
+          <p className='text-center text-slate-600 text-lg mb-16'>
+            {APP_NAME} connects diners, kitchens, and riders on one simple map-first experience.
           </p>
 
           <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
             <div className='text-center'>
-              <div className='text-5xl font-bold text-red-500 mb-2'>5,00,000+</div>
+              <div className='text-5xl font-bold text-fuchsia-600 mb-2'>5,00,000+</div>
               <div className='text-gray-600 text-lg'>restaurants</div>
             </div>
             <div className='text-center'>
-              <div className='text-5xl font-bold text-red-500 mb-2'>800+</div>
+              <div className='text-5xl font-bold text-fuchsia-600 mb-2'>800+</div>
               <div className='text-gray-600 text-lg'>cities</div>
             </div>
             <div className='text-center'>
-              <div className='text-5xl font-bold text-red-500 mb-2'>5 billion+</div>
+              <div className='text-5xl font-bold text-fuchsia-600 mb-2'>5 billion+</div>
               <div className='text-gray-600 text-lg'>orders delivered</div>
             </div>
           </div>
@@ -74,8 +75,8 @@ function Landing() {
       {/* Section 3: Features */}
       <div className='w-full py-20 px-6 bg-gray-50'>
         <div className='max-w-6xl mx-auto'>
-          <h2 className='text-5xl font-bold text-center mb-16 text-gray-800'>
-            What's waiting for you on Zesto?
+          <h2 className='text-5xl font-bold text-center mb-16 text-slate-800'>
+            What you get with {APP_NAME}
           </h2>
 
           <div className='grid grid-cols-2 md:grid-cols-3 gap-8'>
@@ -119,20 +120,20 @@ function Landing() {
       </div>
 
       {/* Section 4: Premium Membership */}
-      <div className='w-full py-20 px-6 bg-gradient-to-r from-yellow-400 to-orange-400'>
+      <div className='w-full py-20 px-6 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-cyan-600'>
         <div className='max-w-6xl mx-auto'>
           <h2 className='text-5xl font-bold text-center mb-4 text-white'>
-            Zesto Premium
+            {APP_NAME} Plus
           </h2>
-          <p className='text-center text-white text-lg mb-12'>
-            India's Top Benefits Program for Food Lovers
+          <p className='text-center text-white/95 text-lg mb-12'>
+            Lower delivery fees and priority support for regular orderers
           </p>
 
           <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
             <div className='bg-white bg-opacity-20 backdrop-blur-md p-8 rounded-2xl text-white'>
               <h3 className='text-3xl font-bold mb-4'>🎯 Best Discounts</h3>
               <p className='text-lg mb-4'>Exclusive member-only offers on your favorite restaurants</p>
-              <button className='bg-white text-orange-500 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition'>
+              <button className='bg-white text-violet-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition'>
                 Learn More
               </button>
             </div>
@@ -140,7 +141,7 @@ function Landing() {
             <div className='bg-white bg-opacity-20 backdrop-blur-md p-8 rounded-2xl text-white'>
               <h3 className='text-3xl font-bold mb-4'>🚀 Free Delivery</h3>
               <p className='text-lg mb-4'>Unlimited free delivery on all orders across restaurants</p>
-              <button className='bg-white text-orange-500 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition'>
+              <button className='bg-white text-violet-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition'>
                 Learn More
               </button>
             </div>
@@ -151,33 +152,33 @@ function Landing() {
       {/* Section 5: Ecosystem */}
       <div className='w-full py-20 px-6 bg-white'>
         <div className='max-w-6xl mx-auto'>
-          <h2 className='text-5xl font-bold text-center mb-16 text-gray-800'>
-            The Zesto Ecosystem
+          <h2 className='text-5xl font-bold text-center mb-16 text-slate-800'>
+            Around {APP_NAME}
           </h2>
 
           <div className='grid grid-cols-1 md:grid-cols-4 gap-8'>
-            <div className='bg-gradient-to-br from-red-100 to-red-200 p-8 rounded-2xl text-center'>
+            <div className='bg-gradient-to-br from-slate-100 to-violet-200 p-8 rounded-2xl text-center'>
               <div className='text-6xl mb-4'>🍽️</div>
-              <h3 className='text-2xl font-bold text-gray-800 mb-2'>Zesto</h3>
-              <p className='text-gray-700'>Food delivery app</p>
+              <h3 className='text-2xl font-bold text-slate-800 mb-2'>Eats</h3>
+              <p className='text-slate-700'>Browse menus & reorder fast</p>
             </div>
 
-            <div className='bg-gradient-to-br from-yellow-100 to-yellow-200 p-8 rounded-2xl text-center'>
+            <div className='bg-gradient-to-br from-cyan-100 to-sky-200 p-8 rounded-2xl text-center'>
               <div className='text-6xl mb-4'>🏪</div>
-              <h3 className='text-2xl font-bold text-gray-800 mb-2'>Zesto Picks</h3>
-              <p className='text-gray-700'>Quick commerce</p>
+              <h3 className='text-2xl font-bold text-slate-800 mb-2'>Local picks</h3>
+              <p className='text-slate-700'>Spotlight on nearby kitchens</p>
             </div>
 
-            <div className='bg-gradient-to-br from-purple-100 to-purple-200 p-8 rounded-2xl text-center'>
+            <div className='bg-gradient-to-br from-fuchsia-100 to-violet-200 p-8 rounded-2xl text-center'>
               <div className='text-6xl mb-4'>🎉</div>
-              <h3 className='text-2xl font-bold text-gray-800 mb-2'>Zesto Events</h3>
-              <p className='text-gray-700'>Event booking</p>
+              <h3 className='text-2xl font-bold text-slate-800 mb-2'>Offers</h3>
+              <p className='text-slate-700'>Flash deals & combo nights</p>
             </div>
 
-            <div className='bg-gradient-to-br from-green-100 to-green-200 p-8 rounded-2xl text-center'>
+            <div className='bg-gradient-to-br from-emerald-100 to-teal-200 p-8 rounded-2xl text-center'>
               <div className='text-6xl mb-4'>🌿</div>
-              <h3 className='text-2xl font-bold text-gray-800 mb-2'>Zesto Farms</h3>
-              <p className='text-gray-700'>Fresh groceries</p>
+              <h3 className='text-2xl font-bold text-slate-800 mb-2'>Fresh lane</h3>
+              <p className='text-slate-700'>Groceries & daily staples</p>
             </div>
           </div>
         </div>
@@ -191,8 +192,8 @@ function Landing() {
               <h2 className='text-5xl font-bold text-gray-800 mb-6'>
                 Download the app now!
               </h2>
-              <p className='text-xl text-gray-600 mb-8'>
-                Experience seamless online ordering only on the Zesto app
+              <p className='text-xl text-slate-600 mb-8'>
+                Get live order status and rider map inside the {APP_NAME} app.
               </p>
 
               <div className='space-y-4 mb-8'>
@@ -206,7 +207,7 @@ function Landing() {
 
               <button 
                 onClick={() => navigate('/signin')}
-                className='w-full border-2 border-red-500 text-red-500 py-3 rounded-lg font-semibold hover:bg-red-50 transition'
+                className='w-full border-2 border-violet-600 text-fuchsia-600 py-3 rounded-lg font-semibold hover:bg-violet-50 transition'
               >
                 Continue on Web
               </button>
@@ -229,7 +230,7 @@ function Landing() {
         <div className='max-w-6xl mx-auto'>
           <div className='grid grid-cols-2 md:grid-cols-5 gap-8 mb-8'>
             <div>
-              <h3 className='font-bold mb-4'>Zesto</h3>
+              <h3 className='font-bold mb-4'>{APP_NAME}</h3>
               <ul className='space-y-2 text-gray-400 text-sm'>
                 <li><a href='#' className='hover:text-white'>About us</a></li>
                 <li><a href='#' className='hover:text-white'>Careers</a></li>
@@ -254,15 +255,15 @@ function Landing() {
             <div>
               <h3 className='font-bold mb-4'>Social Links</h3>
               <div className='flex gap-4 text-xl'>
-                <a href='#' className='hover:text-orange-500'>f</a>
-                <a href='#' className='hover:text-orange-500'>𝕏</a>
-                <a href='#' className='hover:text-orange-500'>📷</a>
+                <a href='#' className='hover:text-violet-600'>f</a>
+                <a href='#' className='hover:text-violet-600'>𝕏</a>
+                <a href='#' className='hover:text-violet-600'>📷</a>
               </div>
             </div>
           </div>
 
           <div className='border-t border-gray-700 pt-8 text-center text-gray-400'>
-            <p>&copy; 2026 Zesto. All rights reserved.</p>
+            <p>&copy; 2026 {APP_NAME}. All rights reserved.</p>
           </div>
         </div>
       </div>

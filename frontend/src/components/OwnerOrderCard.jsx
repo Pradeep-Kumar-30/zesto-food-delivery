@@ -1,11 +1,10 @@
 import axios from 'axios';
 import React from 'react'
 import { MdPhone } from "react-icons/md";
-import { serverUrl } from '../App';
+import { serverUrl } from '../apiConfig';
 import { useDispatch } from 'react-redux';
 import { updateOrderStatus } from '../redux/userSlice';
 import { useState } from 'react';
-import { useEffect } from 'react';
 function OwnerOrderCard({ data }) {
     const [availableBoys,setAvailableBoys]=useState([])
 const dispatch=useDispatch()
@@ -48,10 +47,10 @@ const dispatch=useDispatch()
             </div>
 
 <div className='flex justify-between items-center mt-auto pt-3 border-t border-gray-100'>
-<span className='text-sm'>status: <span className='font-semibold capitalize text-[#ff4d2d]'>{data.shopOrders.status}</span>
+<span className='text-sm'>status: <span className='font-semibold capitalize text-[#6d28d9]'>{data.shopOrders.status}</span>
 </span>
 
-<select  className='rounded-md border px-3 py-1 text-sm focus:outline-none focus:ring-2 border-[#ff4d2d] text-[#ff4d2d]' onChange={(e)=>handleUpdateStatus(data._id,data.shopOrders.shop._id,e.target.value)}>
+<select  className='rounded-md border px-3 py-1 text-sm focus:outline-none focus:ring-2 border-[#6d28d9] text-[#6d28d9]' onChange={(e)=>handleUpdateStatus(data._id,data.shopOrders.shop._id,e.target.value)}>
     <option value="">Change</option>
 <option value="pending">Pending</option>
 <option value="preparing">Preparing</option>
@@ -61,11 +60,11 @@ const dispatch=useDispatch()
 </div>
 
 {data.shopOrders.status=="out of delivery" && 
-<div className="mt-3 p-2 border rounded-lg text-sm bg-orange-50 gap-4">
+<div className="mt-3 p-2 border rounded-lg text-sm bg-violet-50 gap-4">
     {data.shopOrders.assignedDeliveryBoy?<p>Assigned Delivery Boy:</p>:<p>Available Delivery Boys:</p>}
    {availableBoys?.length>0?(
-     availableBoys.map((b,index)=>(
-        <div className='text-gray-800'>{b.fullName}-{b.mobile}</div>
+     availableBoys.map((b) => (
+        <div key={b._id ?? b.mobile} className='text-gray-800'>{b.fullName}-{b.mobile}</div>
      ))
    ):data.shopOrders.assignedDeliveryBoy?<div>{data.shopOrders.assignedDeliveryBoy.fullName}-{data.shopOrders.assignedDeliveryBoy.mobile}</div>:<div>Waiting for delivery boy to accept</div>}
 </div>}

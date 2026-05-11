@@ -41,9 +41,9 @@ const newQty=quantity-1
 }
 
   return (
-    <div className='w-[250px] rounded-3xl border-2 border-orange-200 bg-white shadow-lg overflow-hidden hover:shadow-2xl hover:scale-105 transition-all duration-300 flex flex-col hover:border-orange-400'>
-      <div className='relative w-full h-[170px] flex justify-center items-center bg-gradient-to-br from-orange-100 to-red-100'>
-        <div className='absolute top-3 right-3 bg-white rounded-full p-2 shadow-lg border-2 border-orange-200'>{data.foodType=="veg"?<FaLeaf className='text-green-600 text-lg'/>:<FaDrumstickBite className='text-red-600 text-lg'/>}</div>
+    <div className='w-[250px] rounded-3xl border-2 border-violet-200 bg-white shadow-lg overflow-hidden hover:shadow-2xl hover:scale-105 transition-all duration-300 flex flex-col hover:border-violet-400'>
+      <div className='relative w-full h-[170px] flex justify-center items-center bg-gradient-to-br from-violet-100 to-fuchsia-100'>
+        <div className='absolute top-3 right-3 bg-white rounded-full p-2 shadow-lg border-2 border-violet-200'>{data.foodType=="veg"?<FaLeaf className='text-green-600 text-lg'/>:<FaDrumstickBite className='text-fuchsia-700 text-lg'/>}</div>
 
 <img src={data.image} alt="" className='w-full h-full object-cover transition-transform duration-300 hover:scale-110'/>
       </div>
@@ -59,20 +59,20 @@ const newQty=quantity-1
 </div>
       </div>
 
-<div className='flex items-center justify-between mt-auto p-3 border-t-2 border-orange-100'>
-<span className='font-bold text-transparent bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-lg'>
+<div className='flex items-center justify-between mt-auto p-3 border-t-2 border-violet-100'>
+<span className='font-bold text-transparent bg-gradient-to-r from-violet-700 to-fuchsia-600 bg-clip-text text-lg'>
     ₹{data.price}
 </span>
 
-<div className='flex items-center border-2 border-orange-300 rounded-full overflow-hidden shadow-md'>
-<button className='px-2 py-1 hover:bg-orange-100 transition text-orange-600' onClick={handleDecrease}>
+<div className='flex items-center border-2 border-violet-300 rounded-full overflow-hidden shadow-md'>
+<button className='px-2 py-1 hover:bg-violet-100 transition text-violet-700' onClick={handleDecrease}>
 <FaMinus size={12}/>
 </button>
 <span className='px-2 font-semibold text-gray-700'>{quantity}</span>
-<button className='px-2 py-1 hover:bg-orange-100 transition text-orange-600' onClick={handleIncrease}>
+<button className='px-2 py-1 hover:bg-violet-100 transition text-violet-700' onClick={handleIncrease}>
 <FaPlus size={12}/>
 </button>
-<button className={`${cartItems.some(i=>i.id==data._id)?"bg-gray-700":"bg-gradient-to-r from-orange-500 to-red-500"} text-white px-3 py-2 transition-all hover:shadow-lg`}  onClick={()=>{
+<button className={`${cartItems.some(i=>i.id==data._id)?"bg-gray-700":"bg-gradient-to-r from-violet-600 to-fuchsia-600"} text-white px-3 py-2 transition-all hover:shadow-lg`}  onClick={()=>{
     quantity>0?dispatch(addToCart({
           id:data._id,
           name:data.name,

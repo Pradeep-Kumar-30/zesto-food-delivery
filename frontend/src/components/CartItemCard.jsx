@@ -16,9 +16,9 @@ function CartItemCard({data}) {
         
     }
   return (
-    <div className='flex items-center justify-between bg-white p-3 rounded-2xl shadow-lg border border-orange-100 w-full max-w-2xl mx-auto' style={{minHeight:"86px"}}>
+    <div className='flex items-center justify-between bg-white p-3 rounded-2xl shadow-lg border border-violet-100 w-full max-w-2xl mx-auto' style={{minHeight:"86px"}}>
       <div className='flex items-center gap-3'>
-        <img src={data.image} alt="" className='w-16 h-16 object-cover rounded-lg border border-orange-200'/>
+        <img src={data.image} alt="" className='w-16 h-16 object-cover rounded-lg border border-violet-200'/>
         <div>
             <h1 className='font-semibold text-gray-800 text-sm'>{data.name}</h1>
             <p className='text-xs text-gray-500'>₹{data.price} x {data.quantity}</p>
@@ -33,7 +33,7 @@ function CartItemCard({data}) {
         <button className='p-2 cursor-pointer bg-gray-100 rounded-full hover:bg-gray-200'  onClick={()=>handleIncrease(data.id,data.quantity)}>
         <FaPlus size={12}/>
         </button>
-        <button className="p-2 bg-red-100 text-red-600 rounded-full hover:bg-red-200"
+        <button className="p-2 bg-fuchsia-100 text-fuchsia-700 rounded-full hover:bg-fuchsia-200"
  onClick={()=>dispatch(removeCartItem(data.id))}>
 <CiTrash size={18}/>
         </button>

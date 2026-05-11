@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { serverUrl } from '../App'
+import { serverUrl } from '../apiConfig'
 
 function UserOrderCard({ data }) {
     const navigate = useNavigate()
@@ -19,7 +19,7 @@ function UserOrderCard({ data }) {
 
     const handleRating = async (itemId, rating) => {
         try {
-            const result = await axios.post(`${serverUrl}/api/item/rating`, { itemId, rating }, { withCredentials: true })
+            await axios.post(`${serverUrl}/api/item/rating`, { itemId, rating }, { withCredentials: true })
             setSelectedRating(prev => ({
                 ...prev, [itemId]: rating
             }))
@@ -48,7 +48,7 @@ function UserOrderCard({ data }) {
             </div>
 
             {data.shopOrders.map((shopOrder, index) => (
-                <div className='"border rounded-lg p-3 bg-[#fffaf7] space-y-3' key={index}>
+                <div className='border rounded-lg p-3 bg-violet-50/50 space-y-3' key={index}>
                     <p>{shopOrder.shop.name}</p>
 
                     <div className='flex space-x-4 overflow-x-auto pb-2'>
@@ -78,7 +78,7 @@ function UserOrderCard({ data }) {
 
             <div className='flex justify-between items-center border-t pt-2'>
                 <p className='font-semibold'>Total: ₹{data.totalAmount}</p>
-                <button className='bg-[#ff4d2d] hover:bg-[#e64526] text-white px-4 py-2 rounded-lg text-sm' onClick={() => navigate(`/track-order/${data._id}`)}>Track Order</button>
+                <button className='bg-[#6d28d9] hover:bg-[#5b21b6] text-white px-4 py-2 rounded-lg text-sm' onClick={() => navigate(`/track-order/${data._id}`)}>Track Order</button>
             </div>
 
 

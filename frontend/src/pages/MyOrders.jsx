@@ -4,7 +4,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
 import UserOrderCard from '../components/UserOrderCard';
 import OwnerOrderCard from '../components/OwnerOrderCard';
-import { setMyOrders, updateOrderStatus, updateRealtimeOrderStatus } from '../redux/userSlice';
+import { setMyOrders, updateRealtimeOrderStatus } from '../redux/userSlice';
 
 
 function MyOrders() {
@@ -34,12 +34,12 @@ return ()=>{
 
   
   return (
-    <div className='w-full min-h-screen bg-gradient-to-br from-orange-50 via-red-50 to-yellow-50 flex justify-center px-4 pt-24'>
+    <div className='w-full min-h-screen bg-gradient-to-br from-slate-50 via-violet-50 to-cyan-50 flex justify-center px-4 pt-24'>
       <div className='w-full max-w-[800px] p-4'>
 
         <div className='flex items-center gap-[20px] mb-6 '>
           <div className=' z-[10] cursor-pointer hover:scale-110 transition' onClick={() => navigate("/")}>
-            <IoIosArrowRoundBack size={35} className='text-orange-600' />
+            <IoIosArrowRoundBack size={35} className='text-violet-700' />
           </div>
           <h1 className='text-3xl font-bold gradient-text text-start'>My Orders</h1>
         </div>

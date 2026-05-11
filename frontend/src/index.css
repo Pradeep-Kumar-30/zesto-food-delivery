@@ -1,39 +1,37 @@
 @import "tailwindcss";
 
 * {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* IE/Edge purane versions */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-::-webkit-scrollbar, 
+::-webkit-scrollbar,
 ::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
 }
 
 :root {
-  --primary: #ff4d2d;
-  --primary-dark: #e64528;
-  --secondary: #ffa200;
-  --light-bg: #fff9f6;
+  --primary: #6d28d9;
+  --primary-dark: #5b21b6;
+  --secondary: #0d9488;
+  --light-bg: #f5f3ff;
   --card-bg: #ffffff;
-  --text-dark: #1a1a1a;
-  --text-light: #666666;
-  --border-color: #f0f0f0;
+  --text-dark: #0f172a;
+  --text-light: #64748b;
+  --border-color: #e2e8f0;
 }
 
 body {
-  background: linear-gradient(135deg, #fff9f6 0%, #ffe8dc 100%);
+  background: linear-gradient(145deg, #f8fafc 0%, #f5f3ff 45%, #ecfeff 100%);
   color: var(--text-dark);
 }
 
-/* Smooth transitions */
 button, a, input {
   transition: all 0.3s ease;
 }
 
-/* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #ff4d2d 0%, #ffa200 100%);
+  background: linear-gradient(135deg, #6d28d9 0%, #c026d3 50%, #0d9488 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

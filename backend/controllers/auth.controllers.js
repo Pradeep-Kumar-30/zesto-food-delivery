@@ -2,6 +2,7 @@ import User from "../models/user.model.js"
 import bcrypt, { hash } from "bcryptjs"
 import genToken from "../utils/token.js"
 import { sendOtpMail } from "../utils/mail.js"
+import { getAuthCookieOptions, getAuthClearCookieOptions } from "../utils/authCookie.js"
 export const signUp=async (req,res) => {
     try {
         const {fullName,email,password,mobile,role}=req.body
@@ -26,12 +27,7 @@ export const signUp=async (req,res) => {
         })
 
         const token=await genToken(user._id)
-        res.cookie("token",token,{
-            secure:false,
-            sameSite:"strict",
-            maxAge:7*24*60*60*1000,
-            httpOnly:true
-        })
+        res.cookie("token",token,getAuthCookieOptions())
   
         return res.status(201).json(user)
 
@@ -54,12 +50,7 @@ export const signIn=async (req,res) => {
      }
 
         const token=await genToken(user._id)
-        res.cookie("token",token,{
-            secure:false,
-            sameSite:"strict",
-            maxAge:7*24*60*60*1000,
-            httpOnly:true
-        })
+        res.cookie("token",token,getAuthCookieOptions())
   
         return res.status(200).json(user)
 
@@ -70,7 +61,7 @@ export const signIn=async (req,res) => {
 
 export const signOut=async (req,res) => {
     try {
-        res.clearCookie("token")
+        res.clearCookie("token", getAuthClearCookieOptions())
 return res.status(200).json({message:"log out successfully"})
     } catch (error) {
         return res.status(500).json(`sign out error ${error}`)
@@ -132,26 +123,40 @@ export const resetPassword=async (req,res) => {
 
 export const googleAuth=async (req,res) => {
     try {
-        const {fullName,email,mobile,role}=req.body
-        let user=await User.findOne({email})
-        if(!user){
-            user=await User.create({
-                fullName,email,mobile,role
+        const { fullName, email, mobile, role } = req.body
+        if (!email) {
+            return res.status(400).json({ message: "Email is required" })
+        }
+
+        let user = await User.findOne({ email })
+        if (!user) {
+            // Sign-in page only sends name+email — cannot create account without mobile & role (schema required)
+            if (!mobile || !role) {
+                return res.status(400).json({
+                    message:
+                        "This Google account is not registered yet. Please use Sign Up with Google (add mobile & role) first.",
+                })
+            }
+            if (String(mobile).length < 10) {
+                return res.status(400).json({ message: "Mobile number must be at least 10 digits." })
+            }
+            user = await User.create({
+                fullName: fullName || email.split("@")[0],
+                email,
+                mobile,
+                role,
             })
         }
 
-        const token=await genToken(user._id)
-        res.cookie("token",token,{
-            secure:false,
-            sameSite:"strict",
-            maxAge:7*24*60*60*1000,
-            httpOnly:true
-        })
-  
+        const token = await genToken(user._id)
+        res.cookie("token", token, getAuthCookieOptions())
+
         return res.status(200).json(user)
-
-
     } catch (error) {
-         return res.status(500).json(`googleAuth error ${error}`)
+        const msg = error?.message || String(error)
+        if (error?.name === "ValidationError") {
+            return res.status(400).json({ message: msg })
+        }
+        return res.status(500).json({ message: `Google auth failed: ${msg}` })
     }
 }

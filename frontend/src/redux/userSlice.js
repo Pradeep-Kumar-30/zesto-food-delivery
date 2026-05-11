@@ -1,9 +1,10 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const userSlice = createSlice({
   name: "user",
   initialState: {
     userData: null,
+    authLoading: true,
     currentCity: null,
     currentState: null,
     currentAddress: null,
@@ -18,6 +19,9 @@ const userSlice = createSlice({
   reducers: {
     setUserData: (state, action) => {
       state.userData = action.payload
+    },
+    setAuthLoading: (state, action) => {
+      state.authLoading = action.payload
     },
     setCurrentCity: (state, action) => {
       state.currentCity = action.payload
@@ -105,5 +109,5 @@ const userSlice = createSlice({
   }
 })
 
-export const { setUserData, setCurrentAddress, setCurrentCity, setCurrentState, setShopsInMyCity, setItemsInMyCity, addToCart, updateQuantity, removeCartItem, setMyOrders, addMyOrder, updateOrderStatus, setSearchItems, setTotalAmount, setSocket ,updateRealtimeOrderStatus} = userSlice.actions
+export const { setUserData, setAuthLoading, setCurrentAddress, setCurrentCity, setCurrentState, setShopsInMyCity, setItemsInMyCity, addToCart, updateQuantity, removeCartItem, setMyOrders, addMyOrder, updateOrderStatus, setSearchItems, setTotalAmount, setSocket ,updateRealtimeOrderStatus} = userSlice.actions
 export default userSlice.reducer
