@@ -24,8 +24,7 @@ import TrackOrderPage from './pages/TrackOrderPage'
 import Shop from './pages/Shop'
 import { io } from 'socket.io-client'
 import { setSocket } from './redux/userSlice'
-
-export const serverUrl = "http://localhost:8000"
+import { serverUrl } from './apiConfig'
 
 function App() {
   const { userData, authLoading } = useSelector(state => state.user)

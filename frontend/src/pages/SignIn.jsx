@@ -26,15 +26,24 @@ function SignIn() {
     const handleSignIn = async () => {
         setLoading(true)
         try {
+            const payload = {
+                email: email.trim().toLowerCase(),
+                password: password.trim(),
+            }
             const result = await axios.post(`${serverUrl}/api/auth/signin`, {
-                email, password
+                ...payload
             }, { withCredentials: true })
             dispatch(setUserData(result.data))
             setErr("")
             setLoading(false)
             navigate("/")
         } catch (error) {
-            setErr(error?.response?.data?.message)
+            const data = error?.response?.data
+            const message =
+                (typeof data?.message === "string" && data.message) ||
+                (typeof data === "string" && data) ||
+                "Sign in failed. Please check your credentials."
+            setErr(message)
             setLoading(false)
         }
     }

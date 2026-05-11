@@ -9,6 +9,7 @@ process.on("unhandledRejection", (err) => {
 import express from "express";
 import dotenv from "dotenv";
 import http from "http";
+import net from "net";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { Server } from "socket.io";
@@ -32,6 +33,7 @@ import shopRouter from "./routes/shop.routes.js";
 import orderRouter from "./routes/order.routes.js";
 
 import { socketHandler } from "./socket.js";
+import { parseAllowedOrigins } from "./utils/corsOrigins.js";
 
 // ======================
 // APP + SERVER
@@ -44,11 +46,7 @@ const server = http.createServer(app);
 // CORS CONFIG
 // ======================
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "http://localhost:3000",
-  process.env.FRONTEND_URL,
-].filter(Boolean);
+const allowedOrigins = parseAllowedOrigins();
 
 const corsOriginCallback = (origin, callback) => {
   // Allow Postman / Mobile Apps
@@ -129,7 +127,29 @@ socketHandler(io);
 // START SERVER
 // ======================
 
-const PORT = process.env.PORT || 5000;
+const PORT = Number(process.env.PORT) || 5000;
+
+const isPortAvailable = (port) =>
+  new Promise((resolve) => {
+    const tester = net.createServer();
+
+    tester.once("error", () => resolve(false));
+    tester.once("listening", () => {
+      tester.close(() => resolve(true));
+    });
+
+    tester.listen(port);
+  });
+
+const findAvailablePort = async (startPort) => {
+  let port = startPort;
+
+  while (!(await isPortAvailable(port))) {
+    port += 1;
+  }
+
+  return port;
+};
 
 const startServer = async () => {
   try {
@@ -139,8 +159,16 @@ const startServer = async () => {
 
     console.log("✅ MongoDB Connected");
 
-    server.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT}`);
+    const availablePort = await findAvailablePort(PORT);
+
+    if (availablePort !== PORT) {
+      console.warn(
+        `⚠️ Port ${PORT} is already in use. Falling back to ${availablePort}.`
+      );
+    }
+
+    server.listen(availablePort, () => {
+      console.log(`🚀 Server running on port ${availablePort}`);
       console.log(
         `🌍 Allowed Origins: ${allowedOrigins.join(", ")}`
       );
