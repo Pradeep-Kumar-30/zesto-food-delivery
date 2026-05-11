@@ -9,7 +9,6 @@ process.on("unhandledRejection", (err) => {
 import express from "express";
 import dotenv from "dotenv";
 import http from "http";
-import net from "net";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { Server } from "socket.io";
@@ -17,13 +16,11 @@ import { Server } from "socket.io";
 // ======================
 // ENV CONFIG
 // ======================
-
 dotenv.config({ override: true });
 
 // ======================
 // IMPORTS
 // ======================
-
 import connectDb from "./config/db.js";
 
 import authRouter from "./routes/auth.routes.js";
@@ -33,46 +30,52 @@ import shopRouter from "./routes/shop.routes.js";
 import orderRouter from "./routes/order.routes.js";
 
 import { socketHandler } from "./socket.js";
-import { parseAllowedOrigins } from "./utils/corsOrigins.js";
 
 // ======================
 // APP + SERVER
 // ======================
-
 const app = express();
 const server = http.createServer(app);
 
 // ======================
-// CORS CONFIG
+// ALLOWED ORIGINS
 // ======================
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+  process.env.FRONTEND_URL,
+].filter(Boolean);
 
-const allowedOrigins = parseAllowedOrigins();
+// ======================
+// CORS CONFIG (FIXED)
+// ======================
+const corsOptions = {
+  origin: function (origin, callback) {
+    // allow Postman / mobile apps / server-to-server
+    if (!origin) return callback(null, true);
 
-const corsOriginCallback = (origin, callback) => {
-  // Allow Postman / Mobile Apps
-  if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
 
-  if (allowedOrigins.includes(origin)) {
-    return callback(null, true);
-  }
-
-  console.log("Blocked by CORS:", origin);
-
-  return callback(null, false);
+    console.log("🚫 Blocked by CORS:", origin);
+    return callback(new Error("Not allowed by CORS"));
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
+
+// Apply CORS
+app.use(cors(corsOptions));
 
 // ======================
 // SOCKET.IO
 // ======================
-
 const io = new Server(server, {
   cors: {
-    origin:
-      allowedOrigins.length === 1
-        ? allowedOrigins[0]
-        : allowedOrigins,
+    origin: allowedOrigins,
     credentials: true,
-    methods: ["GET", "POST"],
   },
 });
 
@@ -81,21 +84,12 @@ app.set("io", io);
 // ======================
 // MIDDLEWARES
 // ======================
-
-app.use(
-  cors({
-    origin: corsOriginCallback,
-    credentials: true,
-  })
-);
-
 app.use(express.json());
 app.use(cookieParser());
 
 // ======================
 // ROOT ROUTES
 // ======================
-
 app.get("/", (req, res) => {
   res.status(200).send("🚀 Zesto Backend Running Successfully");
 });
@@ -110,7 +104,6 @@ app.get("/health", (req, res) => {
 // ======================
 // API ROUTES
 // ======================
-
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/shop", shopRouter);
@@ -120,36 +113,12 @@ app.use("/api/order", orderRouter);
 // ======================
 // SOCKET HANDLER
 // ======================
-
 socketHandler(io);
 
 // ======================
 // START SERVER
 // ======================
-
-const PORT = Number(process.env.PORT) || 5000;
-
-const isPortAvailable = (port) =>
-  new Promise((resolve) => {
-    const tester = net.createServer();
-
-    tester.once("error", () => resolve(false));
-    tester.once("listening", () => {
-      tester.close(() => resolve(true));
-    });
-
-    tester.listen(port);
-  });
-
-const findAvailablePort = async (startPort) => {
-  let port = startPort;
-
-  while (!(await isPortAvailable(port))) {
-    port += 1;
-  }
-
-  return port;
-};
+const PORT = process.env.PORT || 5000;
 
 const startServer = async () => {
   try {
@@ -159,19 +128,9 @@ const startServer = async () => {
 
     console.log("✅ MongoDB Connected");
 
-    const availablePort = await findAvailablePort(PORT);
-
-    if (availablePort !== PORT) {
-      console.warn(
-        `⚠️ Port ${PORT} is already in use. Falling back to ${availablePort}.`
-      );
-    }
-
-    server.listen(availablePort, () => {
-      console.log(`🚀 Server running on port ${availablePort}`);
-      console.log(
-        `🌍 Allowed Origins: ${allowedOrigins.join(", ")}`
-      );
+    server.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+      console.log(`🌍 Allowed Origins: ${allowedOrigins.join(", ")}`);
     });
   } catch (error) {
     console.error("❌ SERVER START ERROR");
