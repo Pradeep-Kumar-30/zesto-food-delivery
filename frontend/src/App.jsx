@@ -24,8 +24,8 @@ import TrackOrderPage from './pages/TrackOrderPage'
 import Shop from './pages/Shop'
 import { io } from 'socket.io-client'
 import { setSocket } from './redux/userSlice'
-import { APP_NAME } from './brand'
-import { serverUrl } from './apiConfig'
+
+export const serverUrl = "http://localhost:8000"
 
 function App() {
   const { userData, authLoading } = useSelector(state => state.user)
@@ -54,9 +54,9 @@ function App() {
 
   // ✅ YEH SABSE ZAROORI HAI — jab tak user check ho, routes mat dikhao
   if (authLoading) return (
-    <div className='min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-violet-50 to-cyan-50'>
-      <div className='text-3xl md:text-4xl font-black gradient-text'>
-        {APP_NAME}
+    <div className='min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 via-red-50 to-yellow-50'>
+      <div className='text-4xl font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent'>
+        zesto
       </div>
     </div>
   )
